@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桩土界面弱化函数详解</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .formula-box {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        h2 {
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+        
+        p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .parameter {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .explanation {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #6c757d;
+            font-size: 14px;
+        }
+        
+        ul {
+            font-size: 14px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .highlight {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>桩土界面弱化函数</h1>
+        
+        <div class="formula-box">
+            δ<sub>degrade,j</sub> = exp(-γ × W<sub>p,j</sub> / W<sub>ref</sub>)
+        </div>
+
+        <h2>参数定义</h2>
+        
+        <div class="parameter"><span class="highlight">δ<sub>degrade,j</sub></span> ：第j个深度处的界面弱化系数，范围[0,1]</div>
+        <div class="parameter"><span class="highlight">γ</span> ：弱化速率参数，控制弱化程度</div>
+        <div class="parameter"><span class="highlight">W<sub>p,j</sub></span> ：第j个深度处的累积塑性功</div>
+        <div class="parameter"><span class="highlight">W<sub>ref</sub></span> ：参考塑性功，用于无量纲化</div>
+        
+        <h2>物理意义</h2>
+        
+        <p>该公式表示桩土界面的力学性能随着累积塑性功的增加而呈指数衰减。当累积塑性功W<sub>p,j</sub>增大时，弱化系数δ<sub>degrade,j</sub>减小，表明界面结合强度降低。</p>
+        
+        <div class="explanation">
+            <p><span class="highlight">累积塑性功W<sub>p,j</sub></span>是表征循环荷载损伤程度的关键参数。在每次循环加载过程中，桩土界面发生的不可逆变形会消耗塑性功，这些功的累积反映了界面的疲劳损伤水平。</p>
+        </div>
+        
+        <h2>数学特性</h2>
+        
+        <ul>
+            <li>当W<sub>p,j</sub> = 0时，δ<sub>degrade,j</sub> = 1，表示未发生弱化</li>
+            <li>当W<sub>p,j</sub> → ∞时，δ<sub>degrade,j</sub> → 0，表示完全弱化</li>
+            <li>指数函数确保了弱化过程的单调性和连续性</li>
+            <li>参数γ控制弱化速率：γ越大，弱化越快</li>
+        </ul>
+        
+        <h2>在p-y曲线中的应用</h2>
+        
+        <p>该弱化系数直接作用于p-y曲线的关键参数：</p>
+        
+        <div class="parameter">极限土压力：p<sub>ult,eff</sub> = δ<sub>degrade,j</sub> × p<sub>ult</sub></div>
+        <div class="parameter">初始刚度：k<sub>eff</sub> = δ<sub>degrade,j</sub> × k<sub>0</sub></div>
+        
+        <div class="explanation">
+            <p>这种弱化机制使得长期循环荷载下的p-y曲线能够反映土体强度和刚度的渐进退化，符合实际工程中观测到的桩基承载力衰减现象。</p>
+        </div>
+        
+        <h2>工程意义</h2>
+        
+        <p>在海上风机等长期循环荷载作用下，桩土界面会经历成千上万次的加载循环。传统的p-y方法假设土体参数不变，而本弱化模型考虑了界面性能的时变特性，能够更准确地预测桩基的长期响应。</p>
+        
+        <p>参数γ的取值通常通过长期循环试验确定，其大小反映了不同土质条件下的疲劳特性差异。</p>
+        
+    </div>
+</body>
+</html>
